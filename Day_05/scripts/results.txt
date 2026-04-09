@@ -1,0 +1,15 @@
+Output: split_script.py
+        Training items: 8
+        Testing items: 2
+
+Output: model_train.py
+        Predictions for Test Set: [92.54310345 45.95689655]
+        Actual Scores: [92 40]
+
+Output: regression_line.py
+        Output image in Regression line plot
+
+Output: evaluation.py
+        Mean Squared Error: 17.89
+        R-Squared Score: 0.97
+
