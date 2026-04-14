@@ -1,0 +1,4 @@
+Best Alpha Found: {'alpha': 10.0}
+Best R2 Score: 0.6986
+
+Without Hyperparameter Tuning And Cross validation R2 Score: 0.67
