@@ -1,0 +1,5 @@
+Output: non_linear_task.py
+        Mean Squared Error: 0.7772
+
+Output: Decision_Tree_Regressor.ipynb
+        Mean Squared Error of Decision Tree Regressor: 0.6531
