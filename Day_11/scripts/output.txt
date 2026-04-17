@@ -1,0 +1,12 @@
+Output:random_forest_task.py
+       Random Forest R2 Score: 0.7737
+---------------------------------------------------------------------------------------------------------------------------
+Interpretation of (the_important_plot.py):
+    * Income alone explains the majority of prediction power (~60%).
+    * Location + Occupancy together are strong secondary factors
+    * Physical attributes (like age) have limited influence
+    * The model is economically driven rather than structurally driven
+
+he Random Forest model reveals that housing prices are primarily influenced by economic conditions (income)
+and geographical location, while structural features like house age contribute relatively less.
+---------------------------------------------------------------------------------------------------------------------------
