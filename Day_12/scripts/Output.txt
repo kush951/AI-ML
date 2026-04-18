@@ -1,0 +1,7 @@
+Output: classification_task.py
+        Model Accuracy: 0.9737
+
+Output: confusion_matrix.py
+        Confusion Matrix:
+                         [[41  2]
+                          [ 1 70]]
