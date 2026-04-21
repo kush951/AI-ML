@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MeetMux — Mux Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f; --bg2: #111118; --bg3: #16161f;
+    --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.13);
+    --text: #f0eff8; --muted: #7b7a8e;
+    --accent: #7c6af7; --accent2: #a78bfa;
+    --green: #22d3a5; --amber: #f59e0b; --red: #f43f5e;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: var(--font-body); font-size: 14px;
+    line-height: 1.6; min-height: 100vh; overflow-x: hidden;
+  }
+
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: .4;
+  }
+
+  .orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+  .orb1 { width: 500px; height: 500px; background: rgba(124,106,247,0.12); top: -100px; left: -100px; }
+  .orb2 { width: 400px; height: 400px; background: rgba(34,211,165,0.08); bottom: -80px; right: -80px; }
+
+  .shell { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 24px; border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px); z-index: 100;
+  }
+  .logo { font-family: var(--font-head); font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+  .logo span { color: var(--accent2); }
+
+  /* ── API STATUS BADGE ── */
+  .api-status {
+    display: flex; align-items: center; gap: 7px;
+    font-family: var(--font-mono); font-size: 11px;
+    padding: 4px 14px; border-radius: 20px; letter-spacing: 0.05em;
+    border: 1px solid; transition: all .3s; cursor: default;
+  }
+  .api-status.checking { color: var(--amber); border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
+  .api-status.online   { color: var(--green); border-color: rgba(34,211,165,0.3);  background: rgba(34,211,165,0.08); }
+  .api-status.offline  { color: var(--red);   border-color: rgba(244,63,94,0.3);   background: rgba(244,63,94,0.08); }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .status-dot.pulse { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+
+  /* ── OFFLINE BANNER ── */
+  #offline-banner {
+    display: none; background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.25);
+    border-radius: 12px; padding: 14px 20px; margin: 20px 0;
+    font-size: 13px; color: var(--red); line-height: 1.7;
+  }
+  #offline-banner code { background: rgba(244,63,94,0.15); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 12px; }
+
+  .hero { padding: 80px 0 60px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 11px; color: var(--accent2);
+    background: rgba(124,106,247,0.1); border: 1px solid rgba(124,106,247,0.25);
+    padding: 5px 14px; border-radius: 20px; margin-bottom: 24px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .hero h1 { font-family: var(--font-head); font-size: clamp(36px,5vw,64px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; color: var(--accent2); }
+  .hero p { color: var(--muted); font-size: 16px; max-width: 520px; line-height: 1.7; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin: 48px 0; }
+  .stat { padding: 24px 28px; border-right: 1px solid var(--border); transition: background .2s; }
+  .stat:last-child { border-right: none; }
+  .stat:hover { background: var(--bg3); }
+  .stat-val { font-family: var(--font-head); font-size: 32px; font-weight: 700; letter-spacing: -1px; }
+  .stat-val.green { color: var(--green); }
+  .stat-val.purple { color: var(--accent2); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; font-family: var(--font-mono); }
+
+  .sec-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .sec-num { font-family: var(--font-mono); font-size: 11px; color: var(--accent); background: rgba(124,106,247,0.12); padding: 2px 8px; border-radius: 4px; }
+  .sec-title { font-family: var(--font-head); font-size: 18px; font-weight: 700; }
+
+  .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .full-width { grid-column: 1 / -1; }
+
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: border-color .2s, background .2s; }
+  .card:hover { border-color: var(--border2); background: var(--bg3); }
+  .card-title { font-family: var(--font-head); font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+
+  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: 11px; color: var(--muted); font-family: var(--font-mono); letter-spacing: 0.05em; }
+  .field select {
+    background: var(--bg3); border: 1px solid var(--border2); color: var(--text);
+    border-radius: 8px; padding: 8px 12px; font-family: var(--font-body); font-size: 13px;
+    appearance: none; cursor: pointer; transition: border-color .2s; outline: none;
+  }
+  .field select:focus, .field select:hover { border-color: var(--accent); }
+  .field select option { background: #1a1a26; }
+
+  .range-row { display: flex; align-items: center; gap: 10px; }
+  .range-row input { flex: 1; height: 4px; border-radius: 2px; background: var(--bg3); padding: 0; cursor: pointer; }
+  .range-val { font-family: var(--font-mono); font-size: 12px; color: var(--accent2); min-width: 24px; text-align: right; }
+
+  .attendee-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .avatar { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .avatar-a { background: rgba(124,106,247,0.2); color: var(--accent2); border: 1px solid rgba(124,106,247,0.3); }
+  .avatar-b { background: rgba(34,211,165,0.15); color: var(--green); border: 1px solid rgba(34,211,165,0.25); }
+  .attendee-name { font-family: var(--font-head); font-size: 15px; font-weight: 700; }
+  .attendee-sub { font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+
+  /* ── LOADING SPINNER ── */
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.15); border-top-color: var(--accent2); border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .score-display { display: flex; align-items: center; gap: 24px; margin-bottom: 24px; }
+  .score-ring { position: relative; width: 90px; height: 90px; flex-shrink: 0; }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring .score-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .score-num-big { font-family: var(--font-head); font-size: 26px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
+  .score-denom { font-size: 10px; color: var(--muted); font-family: var(--font-mono); }
+  .score-info { flex: 1; }
+  .verdict-badge { display: inline-block; font-size: 11px; font-family: var(--font-mono); padding: 4px 12px; border-radius: 20px; margin-bottom: 8px; letter-spacing: 0.05em; font-weight: 500; }
+  .verdict-good { background: rgba(34,211,165,0.12); color: var(--green); border: 1px solid rgba(34,211,165,0.25); }
+  .verdict-mid  { background: rgba(245,158,11,0.12); color: var(--amber); border: 1px solid rgba(245,158,11,0.25); }
+  .verdict-low  { background: rgba(244,63,94,0.12);  color: var(--red);   border: 1px solid rgba(244,63,94,0.25); }
+  .top-signal { font-size: 12px; color: var(--muted); }
+  .top-signal strong { color: var(--text); font-weight: 500; }
+
+  .feat-list { display: flex; flex-direction: column; gap: 10px; }
+  .feat-row { display: flex; align-items: center; gap: 10px; }
+  .feat-name { font-size: 12px; color: var(--muted); width: 130px; flex-shrink: 0; font-family: var(--font-mono); }
+  .feat-track { flex: 1; height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+  .feat-fill { height: 100%; border-radius: 3px; transition: width .5s cubic-bezier(.4,0,.2,1); }
+  .feat-score { font-size: 11px; color: var(--muted); width: 32px; text-align: right; font-family: var(--font-mono); }
+
+  .poly-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .poly-term { background: rgba(124,106,247,0.06); border: 1px solid rgba(124,106,247,0.12); border-radius: 10px; padding: 10px 14px; }
+  .poly-name { font-family: var(--font-mono); font-size: 10px; color: var(--accent2); margin-bottom: 4px; }
+  .poly-val { font-family: var(--font-head); font-size: 20px; font-weight: 700; color: var(--text); }
+
+  .matrix-wrap { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; }
+  .matrix-grid { display: grid; grid-template-columns: auto 1fr 1fr; gap: 6px; align-items: center; }
+  .matrix-header { font-size: 10px; color: var(--muted); font-family: var(--font-mono); text-align: center; padding: 4px; letter-spacing: 0.05em; }
+  .matrix-label { font-size: 10px; color: var(--muted); font-family: var(--font-mono); text-align: right; padding-right: 8px; white-space: nowrap; }
+  .matrix-cell { width: 80px; height: 64px; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  .cell-tp { background: rgba(34,211,165,0.15); border: 1px solid rgba(34,211,165,0.25); }
+  .cell-tn { background: rgba(34,211,165,0.1);  border: 1px solid rgba(34,211,165,0.2); }
+  .cell-fp { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.2); }
+  .cell-fn { background: rgba(244,63,94,0.12);  border: 1px solid rgba(244,63,94,0.2); }
+  .cell-val { font-family: var(--font-head); font-size: 22px; font-weight: 700; }
+  .cell-tp .cell-val, .cell-tn .cell-val { color: var(--green); }
+  .cell-fp .cell-val { color: var(--amber); }
+  .cell-fn .cell-val { color: var(--red); }
+  .cell-lbl { font-size: 9px; font-family: var(--font-mono); color: var(--muted); }
+
+  .metric-pills { display: flex; flex-direction: column; gap: 10px; }
+  .metric-pill { display: flex; justify-content: space-between; align-items: center; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; min-width: 160px; }
+  .metric-pill-label { font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+  .metric-pill-val { font-family: var(--font-head); font-size: 18px; font-weight: 700; }
+  .metric-pill-val.green { color: var(--green); }
+  .metric-pill-val.purple { color: var(--accent2); }
+  .metric-pill-val.amber { color: var(--amber); }
+
+  .fi-list { display: flex; flex-direction: column; gap: 8px; }
+  .fi-row { display: flex; align-items: center; gap: 10px; }
+  .fi-rank { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.2); width: 16px; flex-shrink: 0; }
+  .fi-name { font-size: 12px; color: var(--muted); font-family: var(--font-mono); width: 180px; flex-shrink: 0; }
+  .fi-bar-track { flex: 1; height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
+  .fi-bar-fill { height: 100%; border-radius: 4px; transition: width .6s cubic-bezier(.4,0,.2,1); }
+  .fi-val { font-size: 11px; color: var(--muted); font-family: var(--font-mono); min-width: 36px; text-align: right; }
+
+  .pipeline { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding-bottom: 4px; }
+  .step { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 120px; position: relative; }
+  .step:not(:last-child)::after { content: ''; position: absolute; top: 20px; left: 60%; width: 80%; height: 1px; background: linear-gradient(90deg, var(--border2), var(--border)); }
+  .step-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--bg3); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 10px; position: relative; z-index: 1; transition: border-color .2s, background .2s; }
+  .step:hover .step-icon { border-color: var(--accent); background: rgba(124,106,247,0.1); }
+  .step-name { font-size: 11px; color: var(--muted); font-family: var(--font-mono); text-align: center; }
+  .step-file { font-size: 10px; color: var(--accent2); font-family: var(--font-mono); margin-top: 2px; opacity: .7; }
+
+  .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; border: none; border-radius: 10px; padding: 10px 20px; font-family: var(--font-head); font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity .2s, transform .1s; letter-spacing: 0.02em; }
+  .btn:hover { opacity: .88; }
+  .btn:active { transform: scale(.98); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border2); border-radius: 10px; padding: 10px 20px; font-family: var(--font-head); font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent2); }
+  .btn-row { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+
+  /* ── SOURCE BADGE ── */
+  .source-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--font-mono); font-size: 10px; padding: 2px 9px;
+    border-radius: 10px; margin-left: 10px; vertical-align: middle;
+  }
+  .source-badge.live   { background: rgba(34,211,165,0.12); color: var(--green); border: 1px solid rgba(34,211,165,0.2); }
+  .source-badge.cached { background: rgba(245,158,11,0.1);  color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+
+  footer { margin-top: 80px; padding: 32px 24px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-logo { font-family: var(--font-head); font-size: 16px; font-weight: 800; }
+  .footer-logo span { color: var(--accent2); }
+  .footer-meta { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
+
+  .fade-up { opacity: 0; transform: translateY(20px); animation: fadeUp .5s forwards; }
+  @keyframes fadeUp { to { opacity:1; transform:none; } }
+  .fade-up:nth-child(1){animation-delay:.05s}
+  .fade-up:nth-child(2){animation-delay:.12s}
+  .fade-up:nth-child(3){animation-delay:.18s}
+
+  @media(max-width:700px){ .main-grid{grid-template-columns:1fr;} .stats{grid-template-columns:1fr 1fr;} .profile-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<nav>
+  <div class="logo">Meet<span>Mux</span></div>
+  <div id="apiStatus" class="api-status checking">
+    <span class="status-dot pulse"></span>
+    <span id="apiStatusText">connecting...</span>
+  </div>
+</nav>
+
+<div class="shell">
+
+  <!-- OFFLINE BANNER -->
+  <div id="offline-banner">
+    <strong>Flask API is offline.</strong> The UI is showing cached/fallback values.<br/>
+    To connect to the real model, run: <code>cd Day_13/scripts &amp;&amp; python app.py</code>
+    then refresh this page.
+  </div>
+
+  <!-- HERO -->
+  <section class="hero fade-up">
+    <div class="hero-tag"><span style="width:6px;height:6px;background:var(--accent2);border-radius:50%;display:inline-block;animation:pulse 2s infinite"></span>&nbsp;AI/ML Capstone · Day 13</div>
+    <h1>Event Networking<br><em>Matcher</em></h1>
+    <p>A Random Forest classifier that predicts attendee compatibility using polynomial feature engineering — scores powered by <strong style="color:var(--accent2)">random_forest.joblib</strong>.</p>
+  </section>
+
+  <!-- STATS — populated from /metrics -->
+  <div class="stats fade-up">
+    <div class="stat"><div class="stat-val green" id="stat-accuracy">—</div><div class="stat-label">accuracy</div></div>
+    <div class="stat"><div class="stat-val purple" id="stat-f1">—</div><div class="stat-label">f1 score</div></div>
+    <div class="stat"><div class="stat-val" id="stat-pairs">3,000</div><div class="stat-label">training pairs</div></div>
+    <div class="stat"><div class="stat-val" id="stat-features">20</div><div class="stat-label">poly features</div></div>
+  </div>
+
+  <!-- MATCHER -->
+  <section id="matcher">
+    <div class="sec-header">
+      <span class="sec-num">01</span>
+      <span class="sec-title">Compatibility Matcher
+        <span id="predictBadge" class="source-badge cached">● JS fallback</span>
+      </span>
+    </div>
+
+    <div class="main-grid fade-up">
+
+      <!-- ATTENDEE A -->
+      <div class="card">
+        <div class="attendee-head">
+          <div class="avatar avatar-a">AS</div>
+          <div><div class="attendee-name">Attendee A</div><div class="attendee-sub" id="a-sub">AI/ML · 4 yrs · Bangalore</div></div>
+        </div>
+        <div class="profile-grid">
+          <div class="field"><label>Domain</label>
+            <select id="domA" onchange="onProfileChange()">
+              <option>AI/ML</option><option>Data Science</option><option>Backend</option><option>Frontend</option><option>Product</option><option>Design</option>
+            </select></div>
+          <div class="field"><label>Career Goal</label>
+            <select id="goalA" onchange="onProfileChange()">
+              <option>Find co-founder</option><option>Get hired</option><option>Hire talent</option><option>Learn & grow</option><option>Build network</option>
+            </select></div>
+          <div class="field"><label>Comm. Style</label>
+            <select id="commA" onchange="onProfileChange()">
+              <option>Direct</option><option>Collaborative</option><option>Analytical</option><option>Storyteller</option>
+            </select></div>
+          <div class="field"><label>Location</label>
+            <select id="locA" onchange="onProfileChange()">
+              <option>Bangalore</option><option>Mumbai</option><option>Delhi</option><option>Pune</option><option>Remote</option>
+            </select></div>
+          <div class="field" style="grid-column:1/-1"><label>Experience (years)</label>
+            <div class="range-row">
+              <input type="range" id="expA" min="0" max="15" value="4" step="1" oninput="document.getElementById('expAv').textContent=this.value; onProfileChange()">
+              <span class="range-val" id="expAv">4</span>
+            </div></div>
+        </div>
+      </div>
+
+      <!-- ATTENDEE B -->
+      <div class="card">
+        <div class="attendee-head">
+          <div class="avatar avatar-b">RK</div>
+          <div><div class="attendee-name">Attendee B</div><div class="attendee-sub" id="b-sub">Data Science · 3 yrs · Bangalore</div></div>
+        </div>
+        <div class="profile-grid">
+          <div class="field"><label>Domain</label>
+            <select id="domB" onchange="onProfileChange()">
+              <option>AI/ML</option><option selected>Data Science</option><option>Backend</option><option>Frontend</option><option>Product</option><option>Design</option>
+            </select></div>
+          <div class="field"><label>Career Goal</label>
+            <select id="goalB" onchange="onProfileChange()">
+              <option>Find co-founder</option><option>Get hired</option><option>Hire talent</option><option selected>Learn & grow</option><option>Build network</option>
+            </select></div>
+          <div class="field"><label>Comm. Style</label>
+            <select id="commB" onchange="onProfileChange()">
+              <option>Direct</option><option selected>Collaborative</option><option>Analytical</option><option>Storyteller</option>
+            </select></div>
+          <div class="field"><label>Location</label>
+            <select id="locB" onchange="onProfileChange()">
+              <option selected>Bangalore</option><option>Mumbai</option><option>Delhi</option><option>Pune</option><option>Remote</option>
+            </select></div>
+          <div class="field" style="grid-column:1/-1"><label>Experience (years)</label>
+            <div class="range-row">
+              <input type="range" id="expB" min="0" max="15" value="3" step="1" oninput="document.getElementById('expBv').textContent=this.value; onProfileChange()">
+              <span class="range-val" id="expBv">3</span>
+            </div></div>
+        </div>
+      </div>
+
+      <!-- SCORE CARD -->
+      <div class="card">
+        <div class="card-title"><span style="font-size:14px">⚡</span>Compatibility Score</div>
+        <div class="score-display">
+          <div class="score-ring">
+            <svg width="90" height="90" viewBox="0 0 90 90">
+              <circle cx="45" cy="45" r="38" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="7"/>
+              <circle id="scoreCircle" cx="45" cy="45" r="38" fill="none" stroke="#7c6af7" stroke-width="7"
+                stroke-linecap="round" stroke-dasharray="239" stroke-dashoffset="67"
+                style="transition: stroke-dashoffset .5s cubic-bezier(.4,0,.2,1), stroke .3s"/>
+            </svg>
+            <div class="score-text">
+              <span id="scoreLoading" class="spinner" style="display:none"></span>
+              <span class="score-num-big" id="scoreNum">—</span>
+              <span class="score-denom">/100</span>
+            </div>
+          </div>
+          <div class="score-info">
+            <div class="verdict-badge verdict-good" id="verdictBadge">—</div>
+            <div class="top-signal">Top signal: <strong id="topSignal">—</strong></div>
+            <div class="top-signal" style="margin-top:4px;">Poly: <strong id="polyPreview">—</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE BREAKDOWN -->
+      <div class="card">
+        <div class="card-title"><span style="font-size:14px">📊</span>Feature Breakdown</div>
+        <div class="feat-list" id="featList"><div style="color:var(--muted);font-size:12px">Loading...</div></div>
+      </div>
+
+      <!-- POLY TERMS -->
+      <div class="card full-width">
+        <div class="card-title"><span style="font-size:14px">∫</span>Polynomial Interaction Terms</div>
+        <div class="poly-grid" id="polyGrid"><div style="color:var(--muted);font-size:12px">Loading...</div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EVALUATION -->
+  <section id="evaluation" style="margin-top:60px;">
+    <div class="sec-header">
+      <span class="sec-num">02</span>
+      <span class="sec-title">Model Evaluation
+        <span id="evalBadge" class="source-badge cached">● loading...</span>
+      </span>
+    </div>
+
+    <div class="main-grid fade-up">
+
+      <!-- CONFUSION MATRIX -->
+      <div class="card">
+        <div class="card-title"><span style="font-size:14px">🎯</span>Confusion Matrix</div>
+        <div class="matrix-wrap">
+          <div>
+            <div class="matrix-grid">
+              <div></div>
+              <div class="matrix-header">Pred. Match</div>
+              <div class="matrix-header">Pred. No Match</div>
+              <div class="matrix-label">Actual Match</div>
+              <div class="matrix-cell cell-tp"><span class="cell-val" id="cm-tp">—</span><span class="cell-lbl">TP</span></div>
+              <div class="matrix-cell cell-fn"><span class="cell-val" id="cm-fn">—</span><span class="cell-lbl">FN</span></div>
+              <div class="matrix-label">Actual No Match</div>
+              <div class="matrix-cell cell-fp"><span class="cell-val" id="cm-fp">—</span><span class="cell-lbl">FP</span></div>
+              <div class="matrix-cell cell-tn"><span class="cell-val" id="cm-tn">—</span><span class="cell-lbl">TN</span></div>
+            </div>
+          </div>
+          <div class="metric-pills">
+            <div class="metric-pill"><span class="metric-pill-label">Accuracy</span><span class="metric-pill-val green" id="m-accuracy">—</span></div>
+            <div class="metric-pill"><span class="metric-pill-label">Precision</span><span class="metric-pill-val purple" id="m-precision">—</span></div>
+            <div class="metric-pill"><span class="metric-pill-label">Recall</span><span class="metric-pill-val amber" id="m-recall">—</span></div>
+            <div class="metric-pill"><span class="metric-pill-label">F1 Score</span><span class="metric-pill-val green" id="m-f1">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE IMPORTANCE -->
+      <div class="card">
+        <div class="card-title"><span style="font-size:14px">🌲</span>Random Forest Feature Importance</div>
+        <div class="fi-list" id="fiList"><div style="color:var(--muted);font-size:12px">Loading from model...</div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PIPELINE -->
+  <section id="pipeline" style="margin-top:60px;margin-bottom:20px;">
+    <div class="sec-header">
+      <span class="sec-num">03</span>
+      <span class="sec-title">Project Pipeline</span>
+    </div>
+    <div class="card fade-up">
+      <div class="pipeline">
+        <div class="step"><div class="step-icon">⚙️</div><div class="step-name">Config</div><div class="step-file">config.py</div></div>
+        <div class="step"><div class="step-icon">🧬</div><div class="step-name">Data Gen</div><div class="step-file">data_generator.py</div></div>
+        <div class="step"><div class="step-icon">∫</div><div class="step-name">Preprocess</div><div class="step-file">preprocessor.py</div></div>
+        <div class="step"><div class="step-icon">🌲</div><div class="step-name">Model</div><div class="step-file">model.py</div></div>
+        <div class="step"><div class="step-icon">📊</div><div class="step-name">Evaluate</div><div class="step-file">evaluator.py</div></div>
+        <div class="step"><div class="step-icon">⚡</div><div class="step-name">API</div><div class="step-file">app.py</div></div>
+        <div class="step"><div class="step-icon">🌐</div><div class="step-name">UI</div><div class="step-file">meetmux_ui.html</div></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="checkApi()">↻ Retry API Connection</button>
+        <button class="btn-ghost" onclick="alert('cd Day_13/scripts\npython app.py')">View run command</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-logo">Meet<span>Mux</span></div>
+  <div class="footer-meta">Mux Intelligence · connected to random_forest.joblib</div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   CONFIG
+══════════════════════════════════════════════════════════ */
+const API = 'http://localhost:5000';
+const FEAT_COLORS = ['#7c6af7','#22d3a5','#f59e0b','#f43f5e','#60a5fa'];
+
+let apiOnline = false;
+let debounceTimer = null;
+
+/* ══════════════════════════════════════════════════════════
+   API STATUS CHECK
+══════════════════════════════════════════════════════════ */
+async function checkApi() {
+  const el   = document.getElementById('apiStatus');
+  const text = document.getElementById('apiStatusText');
+  el.className = 'api-status checking';
+  text.textContent = 'connecting...';
+
+  try {
+    const res = await fetch(`${API}/health`, { signal: AbortSignal.timeout(3000) });
+    if (res.ok) {
+      apiOnline = true;
+      el.className = 'api-status online';
+      text.textContent = 'API online · localhost:5000';
+      document.getElementById('offline-banner').style.display = 'none';
+      await loadMetrics();
+      await loadFeatureImportance();
+      await callPredict();
+      updateBadge('predictBadge', true);
+      updateBadge('evalBadge', true);
+    } else { throw new Error(); }
+  } catch {
+    apiOnline = false;
+    el.className = 'api-status offline';
+    text.textContent = 'API offline — showing JS fallback';
+    document.getElementById('offline-banner').style.display = 'block';
+    updateBadge('predictBadge', false);
+    updateBadge('evalBadge', false);
+    fallbackCompute();
+    fallbackFI();
+    fallbackMetrics();
+  }
+}
+
+function updateBadge(id, live) {
+  const b = document.getElementById(id);
+  if (live) { b.className = 'source-badge live'; b.textContent = '● RF model'; }
+  else       { b.className = 'source-badge cached'; b.textContent = '● JS fallback'; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   /predict — called on every profile change
+══════════════════════════════════════════════════════════ */
+function onProfileChange() {
+  document.getElementById('a-sub').textContent =
+    `${g('domA')} · ${g('expA')} yrs · ${g('locA')}`;
+  document.getElementById('b-sub').textContent =
+    `${g('domB')} · ${g('expB')} yrs · ${g('locB')}`;
+
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    if (apiOnline) callPredict(); else fallbackCompute();
+  }, 200);
+}
+
+function g(id) { return document.getElementById(id).value; }
+
+async function callPredict() {
+  showScoreLoading(true);
+  try {
+    const body = {
+      user_a: { domain: g('domA'), goal: g('goalA'), experience: +g('expA'), comm_style: g('commA'), location: g('locA') },
+      user_b: { domain: g('domB'), goal: g('goalB'), experience: +g('expB'), comm_style: g('commB'), location: g('locB') },
+    };
+    const res  = await fetch(`${API}/predict`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body), signal: AbortSignal.timeout(5000) });
+    const data = await res.json();
+    renderScore(data.score, data.verdict, data.top_signal, data.features, data.poly_terms);
+  } catch {
+    fallbackCompute();
+  } finally {
+    showScoreLoading(false);
+  }
+}
+
+function showScoreLoading(on) {
+  document.getElementById('scoreLoading').style.display = on ? 'inline-block' : 'none';
+  document.getElementById('scoreNum').style.display     = on ? 'none' : 'inline-block';
+}
+
+/* ══════════════════════════════════════════════════════════
+   /metrics — populates confusion matrix + stats
+══════════════════════════════════════════════════════════ */
+async function loadMetrics() {
+  try {
+    const res  = await fetch(`${API}/metrics`, { signal: AbortSignal.timeout(10000) });
+    const data = await res.json();
+    document.getElementById('cm-tp').textContent    = data.tp;
+    document.getElementById('cm-tn').textContent    = data.tn;
+    document.getElementById('cm-fp').textContent    = data.fp;
+    document.getElementById('cm-fn').textContent    = data.fn;
+    document.getElementById('m-accuracy').textContent  = data.accuracy  + '%';
+    document.getElementById('m-precision').textContent = data.precision + '%';
+    document.getElementById('m-recall').textContent    = data.recall    + '%';
+    document.getElementById('m-f1').textContent        = data.f1        + '%';
+    document.getElementById('stat-accuracy').textContent = data.accuracy + '%';
+    document.getElementById('stat-f1').textContent       = data.f1       + '%';
+  } catch { fallbackMetrics(); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   /feature-importance — populates FI chart
+══════════════════════════════════════════════════════════ */
+async function loadFeatureImportance() {
+  try {
+    const res  = await fetch(`${API}/feature-importance`, { signal: AbortSignal.timeout(10000) });
+    const data = await res.json();
+    renderFI(data);
+  } catch { fallbackFI(); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   RENDER HELPERS
+══════════════════════════════════════════════════════════ */
+function renderScore(score, verdict, topSignal, features, polyTerms) {
+  const circ   = 2 * Math.PI * 38;
+  const offset = circ - (score / 100) * circ;
+  const ring   = document.getElementById('scoreCircle');
+  ring.style.strokeDashoffset = offset;
+  ring.style.stroke = score >= 70 ? '#22d3a5' : score >= 45 ? '#f59e0b' : '#f43f5e';
+
+  document.getElementById('scoreNum').textContent = score;
+
+  const badge = document.getElementById('verdictBadge');
+  if (score >= 70)      { badge.textContent = verdict; badge.className = 'verdict-badge verdict-good'; }
+  else if (score >= 45) { badge.textContent = verdict; badge.className = 'verdict-badge verdict-mid'; }
+  else                  { badge.textContent = verdict; badge.className = 'verdict-badge verdict-low'; }
+
+  document.getElementById('topSignal').textContent  = topSignal;
+  document.getElementById('polyPreview').textContent =
+    `domain × goal = ${(features.domain_sim * features.goal_sim).toFixed(2)}`;
+
+  const names = ['domain_sim','goal_sim','exp_sim','comm_sim','loc_sim'];
+  document.getElementById('featList').innerHTML = names.map((n, i) => `
+    <div class="feat-row">
+      <span class="feat-name">${n}</span>
+      <div class="feat-track"><div class="feat-fill" style="width:${Math.round((features[n]||0)*100)}%;background:${FEAT_COLORS[i]};"></div></div>
+      <span class="feat-score">${(features[n]||0).toFixed(2)}</span>
+    </div>`).join('');
+
+  const pt = polyTerms || {};
+  document.getElementById('polyGrid').innerHTML = Object.entries(pt).map(([k, v]) => `
+    <div class="poly-term">
+      <div class="poly-name">${k}</div>
+      <div class="poly-val">${v}</div>
+    </div>`).join('');
+}
+
+function renderFI(data) {
+  const maxImp = data[0]?.importance || 1;
+  document.getElementById('fiList').innerHTML = data.map((item, i) => `
+    <div class="fi-row">
+      <span class="fi-rank">${String(i+1).padStart(2,'0')}</span>
+      <span class="fi-name">${item.feature}</span>
+      <div class="fi-bar-track"><div class="fi-bar-fill" style="width:${(item.importance/maxImp*100).toFixed(1)}%;background:${FEAT_COLORS[Math.min(i,4)]};opacity:${1-i*0.06}"></div></div>
+      <span class="fi-val">${item.importance}%</span>
+    </div>`).join('');
+}
+
+/* ══════════════════════════════════════════════════════════
+   FALLBACK — JS simulation when API is offline
+══════════════════════════════════════════════════════════ */
+const DG = {'AI/ML':0,'Data Science':0,'Backend':1,'Frontend':1,'Product':2,'Design':2};
+const GC = {'Find co-founder':['Find co-founder','Learn & grow','Build network'],'Get hired':['Hire talent'],'Hire talent':['Get hired'],'Learn & grow':['Find co-founder','Learn & grow','Build network'],'Build network':['Find co-founder','Learn & grow','Build network']};
+const CC = {'Direct':['Direct','Analytical'],'Collaborative':['Collaborative','Storyteller'],'Analytical':['Direct','Analytical'],'Storyteller':['Collaborative','Storyteller']};
+
+function sigmoid(x){ return 1/(1+Math.exp(-x)); }
+
+function fallbackCompute() {
+  const dA=g('domA'), dB=g('domB'), gA=g('goalA'), gB=g('goalB');
+  const eA=+g('expA'), eB=+g('expB'), cA=g('commA'), cB=g('commB');
+  const lA=g('locA'), lB=g('locB');
+
+  const feats = {
+    domain_sim: DG[dA]===DG[dB] ? 1 : 0.3,
+    goal_sim:   (GC[gA]||[]).includes(gB) ? 1 : 0.2,
+    exp_sim:    Math.max(0, 1-Math.abs(eA-eB)/10),
+    comm_sim:   (CC[cA]||[]).includes(cB) ? 1 : 0.15,
+    loc_sim:    lA===lB ? 1 : (lA==='Remote'||lB==='Remote' ? 0.7 : 0.35),
+  };
+  const weights = [0.28,0.24,0.18,0.16,0.14];
+  const vals    = Object.values(feats);
+  let raw = vals.reduce((s,v,i)=>s+weights[i]*v, 0);
+  raw += 0.05*feats.domain_sim*feats.goal_sim + 0.04*feats.exp_sim*feats.comm_sim;
+
+  const score   = Math.min(Math.max(Math.round(sigmoid((raw-0.55)*8)*100), 10), 97);
+  const verdict = score>=70 ? 'Good Match' : score>=45 ? 'Possible Match' : 'Low Compatibility';
+  const names   = ['domain_sim','goal_sim','exp_sim','comm_sim','loc_sim'];
+  const topIdx  = vals.indexOf(Math.max(...vals));
+  const poly    = { 'domain × goal': +(feats.domain_sim*feats.goal_sim).toFixed(3), 'exp × comm': +(feats.exp_sim*feats.comm_sim).toFixed(3), 'domain²': +(feats.domain_sim**2).toFixed(3), 'goal × comm': +(feats.goal_sim*feats.comm_sim).toFixed(3) };
+
+  renderScore(score, verdict, names[topIdx], feats, poly);
+}
+
+function fallbackFI() {
+  const FI = [['goal_sim',22],['domain_sim goal_sim',18],['domain_sim',16],['comm_sim',13],['exp_sim',11],['domain_sim^2',8],['exp_sim comm_sim',5],['loc_sim',4],['goal_sim^2',2],['comm_sim loc_sim',1]];
+  renderFI(FI.map(([f,i])=>({feature:f, importance:i})));
+}
+
+function fallbackMetrics() {
+  ['tp','tn','fp','fn'].forEach(k=>{ const el=document.getElementById(`cm-${k}`); if(el) el.textContent='—'; });
+  [['m-accuracy','90.3%','stat-accuracy'],['m-precision','85.2%'],['m-recall','89.0%'],['m-f1','87.1%','stat-f1']].forEach(([id,val,sid])=>{ const el=document.getElementById(id); if(el) el.textContent=val; if(sid) document.getElementById(sid).textContent=val; });
+}
+
+/* ══════════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════════ */
+window.addEventListener('load', () => {
+  checkApi();
+});
+</script>
+</body>
+</html>

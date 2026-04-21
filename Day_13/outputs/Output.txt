@@ -1,0 +1,131 @@
+╔══════════════════════════════════════════════════════╗
+║         MeetMux — Event Networking Matcher           ║
+║         AI/ML Capstone  |  Mux Intelligence          ║
+╚══════════════════════════════════════════════════════╝
+
+------------Step 1:Generating dataset---------
+[data_generator] Saved → C:\Users\kushp\PycharmProjects\AI-ML\Day_13\scripts\../data/users.csv
+[data_generator] Saved → C:\Users\kushp\PycharmProjects\AI-ML\Day_13\scripts\../data/pairs.csv
+   Users: 300  |  Pairs: 3000  |  Match rate: 36.5%
+
+-------Step 2:Preprocessing-----------
+
+── Preprocessor ────────────────────────────────
+   Original features   : 5
+   After poly (deg=2)  : 20
+   Train samples       : 2400
+   Test  samples       : 600
+[preprocessor] Saved → C:\Users\kushp\PycharmProjects\AI-ML\Day_13\scripts\../models/preprocessor.joblib
+
+-----------Step 3: Training Random Forest---------
+
+-----Training RandomForestClassifier----
+   n_estimators : 200
+   max_depth    : 6
+   Train size   : 2400
+   Training done
+[model] Saved → C:\Users\kushp\PycharmProjects\AI-ML\Day_13\scripts\../models/random_forest.joblib
+
+--- Step 4:Evaluation---
+
+--------Evaluation Report-------
+              precision    recall  f1-score   support
+
+    No Match       0.94      0.91      0.92       381
+       Match       0.85      0.89      0.87       219
+
+    accuracy                           0.90       600
+   macro avg       0.89      0.90      0.90       600
+weighted avg       0.90      0.90      0.90       600
+
+   TP : 195   TN : 347
+   FP : 34   FN : 24
+
+   Accuracy  : 90.3%
+   Precision : 85.2%
+   Recall    : 89.0%
+   F1 Score  : 87.1%
+C:\Users\kushp\PycharmProjects\AI-ML\Day_13\scripts\evaluator.py:102: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout()
+[evaluator] Plot saved → C:\Users\kushp\PycharmProjects\AI-ML\Day_13\scripts\../outputs/evaluation.png
+
+-------Step 5Live Prediction Demo --------
+
+┌────────────────────────────────────────────────────┐
+│             MeetMux Compatibility Report           │
+├────────────────────────────────────────────────────┤
+│  Attendee A           AI/ML                       │
+│  Attendee B           Data Science                │
+├────────────────────────────────────────────────────┤
+│  Score    :  99.9 / 100                            │
+│  Verdict  : Good Match                             │
+│  Top signal: domain_sim                            │
+├────────────────────────────────────────────────────┤
+│  Feature breakdown:                                │
+│    domain_sim      ███████████████  1.00          │
+│    goal_sim        ███████████████  1.00          │
+│    comm_sim                         0.00          │
+│    exp_sim         █████████████    0.93          │
+│    loc_sim         ███████████████  1.00          │
+├────────────────────────────────────────────────────┤
+│  Polynomial interaction terms:                      │
+│    domain × goal        1.000                     │
+│    exp × comm           0.000                     │
+│    domain²              1.000                     │
+│    goal × comm          0.000                     │
+└────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────┐
+│             MeetMux Compatibility Report           │
+├────────────────────────────────────────────────────┤
+│  Attendee A           Frontend                    │
+│  Attendee B           Backend                     │
+├────────────────────────────────────────────────────┤
+│  Score    :  99.6 / 100                            │
+│  Verdict  : Good Match                             │
+│  Top signal: domain_sim                            │
+├────────────────────────────────────────────────────┤
+│  Feature breakdown:                                │
+│    domain_sim      ███████████████  1.00          │
+│    goal_sim        ███████████████  1.00          │
+│    comm_sim                         0.00          │
+│    exp_sim         ███████          0.53          │
+│    loc_sim         ██████████       0.70          │
+├────────────────────────────────────────────────────┤
+│  Polynomial interaction terms:                      │
+│    domain × goal        1.000                     │
+│    exp × comm           0.000                     │
+│    domain²              1.000                     │
+│    goal × comm          0.000                     │
+└────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────┐
+│             MeetMux Compatibility Report           │
+├────────────────────────────────────────────────────┤
+│  Attendee A           Product                     │
+│  Attendee B           Design                      │
+├────────────────────────────────────────────────────┤
+│  Score    : 100.0 / 100                            │
+│  Verdict  : Good Match                             │
+│  Top signal: domain_sim                            │
+├────────────────────────────────────────────────────┤
+│  Feature breakdown:                                │
+│    domain_sim      ███████████████  1.00          │
+│    goal_sim        ███████████████  1.00          │
+│    comm_sim        ███████████████  1.00          │
+│    exp_sim         █████████████    0.93          │
+│    loc_sim         ███████████████  1.00          │
+├────────────────────────────────────────────────────┤
+│  Polynomial interaction terms:                      │
+│    domain × goal        1.000                     │
+│    exp × comm           0.933                     │
+│    domain²              1.000                     │
+│    goal × comm          1.000                     │
+└────────────────────────────────────────────────────┘
+
+------------------------------------------------------
+  Pipeline complete in 2.2s
+  Accuracy : 90.3%  |  F1 : 87.1%
+  Plot saved → outputs/evaluation.png
+  Model saved → models/random_forest.joblib
+------------------------------------------------------

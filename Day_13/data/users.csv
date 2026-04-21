@@ -1,0 +1,301 @@
+user_id,domain,goal,experience,comm_style,location
+0,Frontend,Find co-founder,12,Analytical,Bangalore
+1,Product,Hire talent,4,Collaborative,Remote
+2,Backend,Find co-founder,5,Storyteller,Mumbai
+3,Product,Build network,2,Storyteller,Mumbai
+4,Product,Get hired,7,Storyteller,Mumbai
+5,Data Science,Get hired,15,Storyteller,Mumbai
+6,Backend,Get hired,12,Storyteller,Mumbai
+7,Backend,Hire talent,0,Storyteller,Delhi
+8,Backend,Build network,5,Direct,Remote
+9,Product,Find co-founder,3,Analytical,Bangalore
+10,Frontend,Learn & grow,0,Storyteller,Bangalore
+11,Backend,Find co-founder,14,Analytical,Bangalore
+12,Design,Learn & grow,6,Analytical,Bangalore
+13,Product,Find co-founder,8,Direct,Delhi
+14,Data Science,Build network,12,Storyteller,Pune
+15,Frontend,Learn & grow,3,Collaborative,Remote
+16,Design,Hire talent,3,Direct,Mumbai
+17,Design,Find co-founder,5,Collaborative,Pune
+18,Data Science,Find co-founder,11,Analytical,Bangalore
+19,Frontend,Learn & grow,14,Analytical,Pune
+20,Product,Hire talent,2,Direct,Remote
+21,AI/ML,Hire talent,12,Direct,Mumbai
+22,Frontend,Build network,11,Collaborative,Mumbai
+23,Data Science,Hire talent,5,Storyteller,Remote
+24,Design,Hire talent,6,Collaborative,Remote
+25,Product,Hire talent,10,Direct,Bangalore
+26,Frontend,Get hired,9,Collaborative,Mumbai
+27,AI/ML,Build network,9,Direct,Pune
+28,AI/ML,Find co-founder,2,Collaborative,Delhi
+29,Backend,Learn & grow,6,Direct,Delhi
+30,Backend,Find co-founder,13,Direct,Remote
+31,Data Science,Build network,2,Direct,Bangalore
+32,Frontend,Learn & grow,12,Storyteller,Delhi
+33,Frontend,Build network,12,Collaborative,Mumbai
+34,Design,Hire talent,1,Collaborative,Remote
+35,Design,Learn & grow,11,Collaborative,Pune
+36,Design,Hire talent,13,Direct,Remote
+37,Backend,Find co-founder,9,Collaborative,Pune
+38,Frontend,Find co-founder,3,Collaborative,Remote
+39,Frontend,Learn & grow,11,Direct,Remote
+40,AI/ML,Learn & grow,7,Analytical,Remote
+41,Backend,Build network,12,Direct,Pune
+42,Product,Build network,14,Collaborative,Pune
+43,Backend,Hire talent,8,Direct,Remote
+44,Product,Learn & grow,6,Analytical,Delhi
+45,AI/ML,Find co-founder,0,Direct,Bangalore
+46,Data Science,Build network,2,Collaborative,Bangalore
+47,Frontend,Build network,12,Analytical,Bangalore
+48,AI/ML,Find co-founder,11,Storyteller,Pune
+49,Frontend,Build network,13,Collaborative,Pune
+50,Design,Hire talent,8,Analytical,Delhi
+51,Data Science,Learn & grow,14,Analytical,Bangalore
+52,Data Science,Find co-founder,11,Storyteller,Bangalore
+53,AI/ML,Learn & grow,0,Direct,Remote
+54,Data Science,Build network,8,Direct,Pune
+55,Product,Build network,7,Collaborative,Bangalore
+56,Data Science,Find co-founder,0,Storyteller,Delhi
+57,Frontend,Hire talent,5,Direct,Delhi
+58,Frontend,Get hired,4,Storyteller,Bangalore
+59,Frontend,Find co-founder,5,Direct,Pune
+60,Frontend,Get hired,9,Analytical,Delhi
+61,Product,Get hired,11,Direct,Remote
+62,Backend,Hire talent,12,Storyteller,Delhi
+63,Design,Get hired,15,Analytical,Mumbai
+64,AI/ML,Get hired,12,Analytical,Mumbai
+65,Frontend,Hire talent,12,Analytical,Pune
+66,Data Science,Get hired,14,Storyteller,Bangalore
+67,Frontend,Get hired,4,Collaborative,Pune
+68,Data Science,Get hired,15,Collaborative,Pune
+69,Design,Find co-founder,5,Collaborative,Pune
+70,Design,Find co-founder,4,Storyteller,Pune
+71,Design,Find co-founder,10,Analytical,Remote
+72,Data Science,Hire talent,11,Collaborative,Remote
+73,Frontend,Build network,4,Storyteller,Delhi
+74,Design,Get hired,3,Collaborative,Mumbai
+75,Product,Get hired,2,Direct,Pune
+76,Data Science,Hire talent,2,Collaborative,Delhi
+77,Data Science,Get hired,3,Collaborative,Mumbai
+78,Frontend,Find co-founder,8,Analytical,Bangalore
+79,Data Science,Build network,1,Storyteller,Remote
+80,Data Science,Learn & grow,14,Analytical,Mumbai
+81,Design,Get hired,8,Analytical,Bangalore
+82,Frontend,Find co-founder,0,Analytical,Mumbai
+83,Design,Learn & grow,13,Analytical,Remote
+84,Design,Build network,14,Analytical,Remote
+85,Frontend,Learn & grow,14,Collaborative,Delhi
+86,AI/ML,Find co-founder,0,Analytical,Pune
+87,Design,Learn & grow,4,Analytical,Mumbai
+88,Product,Hire talent,5,Storyteller,Mumbai
+89,Product,Learn & grow,5,Direct,Bangalore
+90,Data Science,Get hired,2,Collaborative,Remote
+91,Product,Get hired,15,Collaborative,Mumbai
+92,Data Science,Hire talent,6,Collaborative,Remote
+93,AI/ML,Find co-founder,8,Analytical,Mumbai
+94,Frontend,Get hired,10,Analytical,Delhi
+95,Frontend,Build network,11,Analytical,Pune
+96,Frontend,Get hired,9,Storyteller,Mumbai
+97,Product,Get hired,15,Direct,Remote
+98,AI/ML,Find co-founder,15,Analytical,Delhi
+99,Product,Learn & grow,7,Direct,Mumbai
+100,Product,Get hired,5,Storyteller,Bangalore
+101,AI/ML,Hire talent,11,Collaborative,Pune
+102,AI/ML,Learn & grow,7,Analytical,Mumbai
+103,AI/ML,Build network,11,Direct,Delhi
+104,AI/ML,Find co-founder,4,Direct,Bangalore
+105,Frontend,Build network,7,Analytical,Delhi
+106,Backend,Learn & grow,9,Collaborative,Delhi
+107,Backend,Learn & grow,11,Collaborative,Bangalore
+108,AI/ML,Learn & grow,3,Collaborative,Delhi
+109,Backend,Build network,9,Storyteller,Bangalore
+110,Backend,Learn & grow,7,Direct,Mumbai
+111,AI/ML,Build network,9,Direct,Bangalore
+112,Backend,Learn & grow,11,Direct,Bangalore
+113,Product,Hire talent,1,Storyteller,Pune
+114,Data Science,Learn & grow,11,Direct,Bangalore
+115,Data Science,Build network,11,Storyteller,Bangalore
+116,AI/ML,Get hired,4,Collaborative,Mumbai
+117,Frontend,Learn & grow,8,Analytical,Pune
+118,AI/ML,Get hired,3,Direct,Remote
+119,Frontend,Hire talent,15,Direct,Mumbai
+120,Data Science,Find co-founder,10,Collaborative,Mumbai
+121,AI/ML,Hire talent,5,Analytical,Remote
+122,Design,Learn & grow,14,Storyteller,Bangalore
+123,Product,Get hired,0,Analytical,Delhi
+124,Backend,Get hired,8,Collaborative,Pune
+125,Frontend,Build network,0,Collaborative,Delhi
+126,Design,Get hired,4,Analytical,Remote
+127,Backend,Build network,3,Storyteller,Mumbai
+128,Backend,Find co-founder,12,Storyteller,Mumbai
+129,AI/ML,Learn & grow,11,Direct,Pune
+130,Backend,Build network,15,Storyteller,Mumbai
+131,Product,Find co-founder,12,Analytical,Mumbai
+132,Design,Get hired,12,Collaborative,Pune
+133,Backend,Get hired,13,Direct,Pune
+134,AI/ML,Find co-founder,2,Direct,Remote
+135,Product,Get hired,12,Collaborative,Mumbai
+136,Data Science,Find co-founder,5,Storyteller,Mumbai
+137,Design,Build network,1,Collaborative,Remote
+138,Backend,Build network,2,Storyteller,Bangalore
+139,AI/ML,Find co-founder,15,Collaborative,Bangalore
+140,Data Science,Build network,4,Analytical,Bangalore
+141,Data Science,Build network,14,Storyteller,Remote
+142,Frontend,Build network,8,Analytical,Mumbai
+143,Product,Hire talent,1,Direct,Remote
+144,Backend,Learn & grow,9,Collaborative,Remote
+145,AI/ML,Get hired,7,Direct,Bangalore
+146,Frontend,Hire talent,13,Direct,Delhi
+147,Product,Build network,1,Direct,Mumbai
+148,Frontend,Find co-founder,10,Direct,Bangalore
+149,Design,Build network,12,Collaborative,Delhi
+150,Product,Learn & grow,4,Direct,Delhi
+151,Product,Build network,6,Collaborative,Pune
+152,Backend,Find co-founder,7,Collaborative,Mumbai
+153,Product,Learn & grow,0,Analytical,Delhi
+154,Frontend,Build network,5,Storyteller,Bangalore
+155,Product,Learn & grow,0,Storyteller,Pune
+156,Backend,Get hired,1,Collaborative,Mumbai
+157,Backend,Get hired,15,Analytical,Remote
+158,Design,Build network,14,Collaborative,Bangalore
+159,Frontend,Learn & grow,0,Collaborative,Delhi
+160,Data Science,Find co-founder,10,Collaborative,Delhi
+161,Data Science,Build network,4,Analytical,Bangalore
+162,Product,Get hired,9,Storyteller,Delhi
+163,Design,Get hired,14,Analytical,Pune
+164,AI/ML,Build network,8,Direct,Mumbai
+165,Product,Learn & grow,5,Analytical,Pune
+166,Design,Get hired,10,Analytical,Delhi
+167,Frontend,Learn & grow,10,Analytical,Remote
+168,Frontend,Get hired,0,Analytical,Mumbai
+169,Frontend,Get hired,12,Storyteller,Mumbai
+170,Frontend,Hire talent,0,Direct,Bangalore
+171,Frontend,Get hired,1,Storyteller,Bangalore
+172,Design,Find co-founder,8,Storyteller,Remote
+173,Design,Build network,2,Analytical,Mumbai
+174,Backend,Build network,14,Collaborative,Remote
+175,Data Science,Learn & grow,0,Collaborative,Bangalore
+176,Frontend,Get hired,4,Storyteller,Bangalore
+177,AI/ML,Find co-founder,15,Storyteller,Mumbai
+178,Design,Learn & grow,6,Analytical,Pune
+179,AI/ML,Hire talent,5,Storyteller,Delhi
+180,AI/ML,Learn & grow,11,Analytical,Bangalore
+181,AI/ML,Learn & grow,0,Collaborative,Bangalore
+182,Backend,Get hired,4,Collaborative,Pune
+183,Design,Hire talent,14,Direct,Pune
+184,AI/ML,Learn & grow,4,Collaborative,Remote
+185,Frontend,Find co-founder,5,Storyteller,Remote
+186,Product,Find co-founder,2,Collaborative,Delhi
+187,AI/ML,Build network,4,Analytical,Delhi
+188,Backend,Hire talent,6,Collaborative,Mumbai
+189,Design,Hire talent,4,Direct,Remote
+190,Backend,Build network,4,Collaborative,Bangalore
+191,AI/ML,Learn & grow,4,Analytical,Remote
+192,Design,Hire talent,9,Analytical,Bangalore
+193,Product,Find co-founder,9,Storyteller,Pune
+194,AI/ML,Find co-founder,2,Collaborative,Remote
+195,Backend,Get hired,0,Analytical,Pune
+196,Data Science,Hire talent,4,Direct,Delhi
+197,Frontend,Learn & grow,13,Storyteller,Delhi
+198,Backend,Build network,8,Direct,Mumbai
+199,Design,Build network,13,Collaborative,Remote
+200,AI/ML,Learn & grow,0,Collaborative,Pune
+201,Frontend,Get hired,2,Collaborative,Bangalore
+202,AI/ML,Build network,12,Storyteller,Delhi
+203,Design,Hire talent,12,Analytical,Delhi
+204,AI/ML,Get hired,3,Storyteller,Bangalore
+205,Data Science,Hire talent,13,Direct,Pune
+206,Frontend,Find co-founder,0,Storyteller,Pune
+207,Frontend,Get hired,0,Direct,Remote
+208,Design,Build network,7,Storyteller,Remote
+209,Data Science,Get hired,15,Analytical,Mumbai
+210,Backend,Get hired,1,Direct,Delhi
+211,AI/ML,Get hired,11,Collaborative,Remote
+212,Product,Get hired,14,Collaborative,Pune
+213,AI/ML,Hire talent,7,Storyteller,Bangalore
+214,AI/ML,Find co-founder,6,Collaborative,Pune
+215,Backend,Learn & grow,9,Direct,Delhi
+216,AI/ML,Get hired,9,Collaborative,Pune
+217,Data Science,Build network,1,Analytical,Mumbai
+218,Data Science,Get hired,5,Analytical,Delhi
+219,Frontend,Build network,5,Storyteller,Bangalore
+220,Design,Hire talent,2,Direct,Mumbai
+221,Product,Build network,10,Analytical,Delhi
+222,AI/ML,Learn & grow,1,Analytical,Bangalore
+223,AI/ML,Find co-founder,11,Direct,Mumbai
+224,Backend,Build network,0,Collaborative,Mumbai
+225,Design,Build network,5,Collaborative,Delhi
+226,Data Science,Find co-founder,11,Storyteller,Remote
+227,Product,Learn & grow,4,Collaborative,Mumbai
+228,Frontend,Get hired,13,Direct,Mumbai
+229,Data Science,Build network,13,Analytical,Bangalore
+230,Design,Find co-founder,10,Collaborative,Pune
+231,Frontend,Hire talent,8,Storyteller,Delhi
+232,Backend,Find co-founder,0,Collaborative,Delhi
+233,Backend,Hire talent,15,Direct,Remote
+234,AI/ML,Learn & grow,14,Storyteller,Remote
+235,Design,Get hired,14,Collaborative,Delhi
+236,Product,Find co-founder,6,Storyteller,Remote
+237,Frontend,Build network,14,Direct,Bangalore
+238,Data Science,Learn & grow,4,Analytical,Delhi
+239,Design,Find co-founder,4,Direct,Remote
+240,Design,Build network,13,Direct,Delhi
+241,Backend,Find co-founder,1,Direct,Pune
+242,AI/ML,Hire talent,10,Direct,Mumbai
+243,AI/ML,Find co-founder,2,Analytical,Delhi
+244,Frontend,Find co-founder,6,Analytical,Mumbai
+245,Backend,Find co-founder,5,Storyteller,Remote
+246,Design,Learn & grow,15,Collaborative,Mumbai
+247,Product,Find co-founder,11,Analytical,Delhi
+248,Backend,Build network,1,Analytical,Pune
+249,Frontend,Hire talent,5,Collaborative,Remote
+250,Frontend,Hire talent,1,Analytical,Delhi
+251,Backend,Find co-founder,1,Direct,Remote
+252,Frontend,Learn & grow,1,Direct,Bangalore
+253,Backend,Learn & grow,13,Collaborative,Mumbai
+254,Data Science,Build network,14,Storyteller,Bangalore
+255,Backend,Find co-founder,10,Storyteller,Delhi
+256,Backend,Hire talent,2,Collaborative,Pune
+257,Frontend,Learn & grow,14,Collaborative,Remote
+258,Frontend,Find co-founder,1,Direct,Mumbai
+259,AI/ML,Learn & grow,3,Storyteller,Remote
+260,AI/ML,Learn & grow,8,Analytical,Delhi
+261,Data Science,Hire talent,5,Direct,Remote
+262,AI/ML,Get hired,0,Collaborative,Mumbai
+263,Backend,Build network,7,Storyteller,Delhi
+264,Frontend,Build network,14,Analytical,Remote
+265,AI/ML,Hire talent,11,Analytical,Pune
+266,AI/ML,Learn & grow,13,Direct,Delhi
+267,Data Science,Find co-founder,6,Storyteller,Delhi
+268,Design,Learn & grow,9,Storyteller,Pune
+269,Data Science,Hire talent,2,Collaborative,Bangalore
+270,Backend,Build network,0,Storyteller,Mumbai
+271,Frontend,Learn & grow,4,Storyteller,Bangalore
+272,Data Science,Build network,12,Direct,Remote
+273,AI/ML,Find co-founder,3,Storyteller,Pune
+274,Frontend,Build network,9,Analytical,Bangalore
+275,Frontend,Build network,7,Direct,Delhi
+276,AI/ML,Get hired,0,Direct,Remote
+277,Data Science,Get hired,9,Collaborative,Remote
+278,AI/ML,Get hired,0,Storyteller,Bangalore
+279,Design,Build network,11,Collaborative,Bangalore
+280,Frontend,Hire talent,3,Analytical,Pune
+281,Product,Build network,7,Direct,Mumbai
+282,Product,Hire talent,4,Direct,Bangalore
+283,Backend,Hire talent,1,Direct,Bangalore
+284,AI/ML,Get hired,5,Analytical,Delhi
+285,AI/ML,Learn & grow,4,Analytical,Remote
+286,Backend,Find co-founder,1,Collaborative,Mumbai
+287,Backend,Get hired,12,Collaborative,Delhi
+288,Backend,Get hired,13,Collaborative,Pune
+289,Frontend,Learn & grow,10,Storyteller,Pune
+290,Design,Find co-founder,10,Direct,Bangalore
+291,AI/ML,Build network,15,Direct,Bangalore
+292,Frontend,Build network,10,Collaborative,Pune
+293,Backend,Get hired,2,Direct,Bangalore
+294,AI/ML,Find co-founder,14,Collaborative,Mumbai
+295,Frontend,Get hired,8,Storyteller,Bangalore
+296,Design,Hire talent,6,Storyteller,Remote
+297,Frontend,Get hired,6,Analytical,Bangalore
+298,Design,Get hired,15,Storyteller,Delhi
+299,Backend,Build network,14,Collaborative,Mumbai
