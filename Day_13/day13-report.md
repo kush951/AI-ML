@@ -273,7 +273,8 @@ meetmux/
 # 🔗Run Instructions
 
 ```bash
-python main.py
+python app.py
+html meetmux_ui_integrated.thml
 ```
 
 Outputs:
