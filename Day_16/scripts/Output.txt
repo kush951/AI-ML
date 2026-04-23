@@ -1,0 +1,37 @@
+Output: model_validation.py
+        Scores for each fold: [0.93055556 0.90833333 0.96100279 0.9637883  0.93593315]
+        Mean Accuracy: 0.9399
+        Standard Deviation (Stability): 0.0206
+
+------------------------------------------------------------------------------------------------------------------------
+
+Output:- detecting_overfitting.py
+         Scores for each fold: [0.93055556 0.90833333 0.96100279 0.9637883  0.93593315]
+         Mean Accuracy: 0.9399
+         Standard Deviation (Stability): 0.0206
+         Training Accuracy: 1.0000
+         Validation Accuracy: 0.9399
+
+         Observation:-
+         The model achieved a mean cross-validation accuracy of 93.99% with
+         a low standard deviation of 0.0206, indicating high stability across
+         different data splits. The training accuracy reached 100%, while the
+         validation accuracy was slightly lower at 93.99%. This small gap suggests
+         mild overfitting; however, since the validation performance remains high
+         and consistent, the model demonstrates strong generalization capability
+         and is suitable for real-world scenarios.
+
+------------------------------------------------------------------------------------------------------------------------
+
+Output: k_fold_cross_validation.py
+
+        Accuracy for each fold: [1.00.96666667 0.93333333 0.93333333 0.96666667]
+        Mean Accuracy: 0.9600
+        Standard Deviation: 0.0249
+
+        Observation:-
+        The model achieved fold-wise accuracies of [1.00, 0.9667, 0.9333, 0.9333, 0.9667],
+        resulting in a mean accuracy of approximately 96% with a low standard deviation (~0.025).
+        The low variance across folds indicates that the model is stable and not sensitive to
+        different data splits. There is no significant evidence of overfitting, and the model
+        demonstrates strong generalization capability.
