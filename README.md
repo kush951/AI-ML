@@ -1,184 +1,139 @@
+
 # 🚀 90 Days Industry Immersion Program (AI/ML Track)
 
 ## 👨‍💻 Overview
 
-This repository documents my 90 Days journey in the AI/ML track, where I am building industry-level skills in data handling, machine learning, and real-world problem solving.
+This repository tracks my **15-day progress** in the AI/ML track, focused on building **industry-level skills** in data science, machine learning, and real-world problem solving.
 
 ---
 
-# 📅 Day-wise Progress
+# 📅 Progress Summary (Day 1 – Day 15)
 
 ---
 
-## ✅ Day 1: Getting Started with Python
+## 🧠 Phase 1: Foundations (Day 1 – Day 4)
 
-### 🎯 Focus:
+### 🔹 Covered:
 
-* Python basics (variables, loops, functions)
+* Python Basics (loops, functions, logic)
+* Data Structures (lists, dictionaries, tuples)
+* NumPy & Pandas
+* Data Cleaning & Preprocessing
 
-### 💡 Learning:
+### 💡 Key Takeaways:
 
-* Understood core programming concepts
-* Built logical thinking foundation
-
----
-
-## ✅ Day 2: Data Structures & Problem Solving
-
-### 🎯 Focus:
-
-* Lists, dictionaries, tuples
-* Basic problem-solving
-
-### 💡 Learning:
-
-* Efficient data handling
-* Writing cleaner and optimized code
+* Built strong programming foundation
+* Learned efficient data handling
+* Understood importance of clean data
 
 ---
 
-## ✅ Day 3: Data Handling (NumPy & Pandas)
+## 📊 Phase 2: Core Machine Learning (Day 5 – Day 10)
 
-### 🎯 Focus:
+### 🔹 Models Implemented:
 
-* Data manipulation using Pandas
-* Numerical operations using NumPy
+* Linear Regression
+* Logistic Regression
+* K-Nearest Neighbors (KNN)
 
-### 💡 Learning:
+### 🔹 Concepts Learned:
 
-* Data loading, cleaning, filtering
-* Vectorization for performance improvement
+* Train-Test Split
+* Model Training vs Evaluation
+* Overfitting & Underfitting
 
----
+### 📈 Evaluation Techniques:
 
-## ✅ Day 4: Data Cleaning & Preprocessing
+* Confusion Matrix
+* Accuracy, Precision, Recall, F1-score
 
-### 🎯 Focus:
+### 💡 Key Insight:
 
-* Handling missing values
-* Data transformation
-
-### 💡 Learning:
-
-* Importance of clean data
-* Real-world data preprocessing techniques
+> Accuracy alone is not enough — understanding errors is critical.
 
 ---
 
-## ✅ Day 5: Linear Regression (Prediction)
+## 🌲 Phase 3: Advanced Models & Comparison (Day 11 – Day 13)
 
-### 🎯 Focus:
+### 🔹 Models Explored:
 
-* Regression model (predicting continuous values)
+* Random Forest
+* Model Comparison Techniques
 
-### 💡 Learning:
+### 🔹 Work Done:
 
-* Model training and testing
-* Train-test split concept
-* Difference between training and evaluation
+* Compared multiple models
+* Analyzed feature importance
+* Improved prediction performance
 
----
+### 💡 Key Insight:
 
-## 🚀 Day 6: Logistic Regression & Classification Metrics
-
-### 🎯 Objective
-
-Built a binary classification model and evaluated it using confusion matrix and classification metrics.
+> Ensemble models like Random Forest improve stability and accuracy.
 
 ---
 
-### 🧪 Basic Experiment (Sleep vs Coffee)
+## 🚀 Phase 4: Real-World Project (Day 13 -14)
 
-* Predicted **Pass/Fail**
-* Achieved **100% accuracy** (small dataset)
+### 🎯 Project: **Mux Intelligence – Event Networking Matcher**
 
-✔ Key Learning:
+### 🔹 Objective:
 
-* Sleep → positive impact
-* Coffee → negative impact
+Predict compatibility between users for networking events.
 
----
+### 🔹 Features Used:
 
-### 📊 Model Evaluation
+* Domain similarity
+* Career goals
+* Experience level
+* Communication style
+* Location
 
-* Used **Confusion Matrix**
-* Generated **Classification Report**
+### 🔹 What I Built:
 
-✔ Insight:
+* Pairwise feature engineering system
+* ML-based compatibility prediction
+* Model evaluation pipeline
+* Visualization (heatmaps, charts)
 
-> Accuracy alone is not enough — error analysis is important
+### 💡 Key Insight:
 
----
-
-### 🔬 Feature Importance
-
-* Extracted model coefficients
-* Identified impact of features on prediction
-
----
-
-### 🧪 Prediction Experiment
-
-* Low sleep + high coffee → **Fail**
-* High sleep + low coffee → **Pass**
-
----
-
-### 🏥 Real-World Application (Breast Cancer Dataset)
-
-* Applied Logistic Regression
-* Achieved **97% accuracy**
-
-📊 Confusion Matrix:
-
-```
-[[70  1]
- [ 2 41]]
-```
-
-✔ Critical Insight:
-
-* **False Negatives are dangerous**
-* Recall is important in healthcare systems
-
----
-
-### 💡 Aha Moment
-
-> A highly accurate model can still be risky if it makes critical errors.
-> In real-world AI, **error type matters more than accuracy**.
+> Real-world ML is about **feature engineering + problem understanding**, not just models.
 
 ---
 
 # 🛠️ Tech Stack
 
 * Python
-* NumPy
-* Pandas
-* Matplotlib & Seaborn
+* NumPy & Pandas
 * Scikit-learn
+* Matplotlib & Seaborn
+* Flask (API Integration)
 
 ---
 
-# 🎯 Key Takeaways
+## Day 15: Clustering & Visualization
 
-* Strong foundation in data handling
-* Understanding of regression vs classification
-* Importance of evaluation metrics
-* Real-world ML thinking and error analysis
+🔹 Work Done:
+* Implemented K-Means Clustering
+* Built 2D & 3D cluster visualizations
+* Analyzed user grouping patterns
+* Generated visual outputs (charts, cluster plots)
 
----
+🔹 Key Concepts:
+* Unsupervised Learning
+* Cluster formation
+* Pattern discovery in data
+💡 Key Insight:
 
-# 🚀 Future Goals
+**Key Insight:**
 
-* Explore advanced ML models (Random Forest, SVM)
-* Learn Deep Learning
-* Build and deploy ML applications
+Clustering helps discover hidden patterns without labels — useful for segmentation and recommendations.
 
 ---
 
 # 📌 Final Thought
 
-This journey is not just about learning algorithms, but about developing the mindset to solve real-world problems using AI.
+> “Machine Learning is not just about models —
+> it’s about solving real problems with the right approach.”
 
----
+--

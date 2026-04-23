@@ -1,0 +1,24 @@
+Observation:
+
+1. The dataset has been successfully divided into 5 distinct
+clusters using the K-Means algorithm with K=5, as determined by the Elbow Method.
+
+2. Each cluster is clearly separated in the feature space, indicating
+that the algorithm has effectively grouped similar data points together.
+
+3. The centroids (yellow ‘X’ markers) are positioned at the center of each cluster,
+representing the mean location of all points in that cluster.
+
+
+4. It is observed that:
+    # Points within the same cluster are closely packed (low intra-cluster distance).
+    # Different clusters are well-separated (high inter-cluster distance).
+
+5. The clustering result reflects meaningful segmentation:
+    # Some clusters represent high spending behavior
+    # Others represent low or moderate spending groups
+    # Income levels vary across clusters, forming distinct user segments
+6. The use of init = 'k-means++' ensured:
+    # Better initialization of centroids
+    # Faster convergence
+    # More stable and accurate clustering results
