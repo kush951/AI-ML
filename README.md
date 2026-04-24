@@ -239,3 +239,49 @@ Day 16 teaches that:
 - A good ML model must be **accurate, stable, and generalizable**
 
 ---
+
+#  Day 17: Hyperparameter Tuning
+
+##  Objective
+Optimize model performance using GridSearchCV and RandomizedSearchCV.
+
+---
+
+## ️ Model
+- Random Forest Classifier  
+- Dataset: Breast Cancer (sklearn)
+
+---
+
+##  Results
+- **Best Parameters:**  
+  {'max_depth': None, 'min_samples_split': 2, 'n_estimators': 50}  
+
+- **Best Accuracy:**  
+  96.31%
+
+---
+
+##  Comparison
+
+| Method              | Fits | Accuracy |
+|--------------------|------|----------|
+| GridSearchCV       | 81   | 96.31%   |
+| RandomizedSearchCV | 30   | 96.31%   |
+
+---
+
+##  Key Insight
+RandomizedSearchCV achieved the same accuracy with fewer computations (~63% faster).
+
+---
+
+##  Model Saved
+- `best_model.pkl` using joblib
+
+---
+
+##  Takeaway
+Efficient optimization > Exhaustive search
+
+---
