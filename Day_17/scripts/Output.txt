@@ -1,0 +1,8 @@
+Output: model_tuning.py
+        Fitting 3 folds for each of 27 candidates, totalling 81 fits
+        Best Parameters: {'max_depth': None, 'min_samples_split': 2, 'n_estimators': 50}
+        Best CV Score:   0.9631 = 96.31%
+
+------------------------------------------------------------------------------------------------------------------------
+
+Output: randomize_search_tuning.py
