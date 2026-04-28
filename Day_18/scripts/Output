@@ -1,0 +1,25 @@
+Output: tex_cleaner.py
+        Original Bio: I love Hiking in the mountains and Coding late at night!
+        Cleaned Bio: love hiking mountain coding late night
+
+------------------------------------------------------------------------------------------------------------------------
+
+Output: tex_cleaner.py
+        Vocabulary: ['and' 'chef' 'enthusiast' 'expert' 'for' 'good' 'hiker' 'hiking' 'in' 'learning' 'loves' 'machine'
+        'mountain' 'mountains' 'outdoor' 'professional' 'python' 'social' 'who']
+
+        Vector Shape: (3, 19)
+
+        TF-IDF Matrix:
+        [[0.21558166 0.         0.         0.36501149 0.36501149 0.36501149
+          0.         0.         0.36501149 0.27760064 0.         0.27760064
+          0.         0.         0.         0.         0.36501149 0.36501149
+          0.        ]
+         [0.21786941 0.36888498 0.         0.         0.         0.
+          0.         0.36888498 0.         0.         0.36888498 0.
+          0.         0.36888498 0.36888498 0.36888498 0.         0.
+          0.36888498]
+         [0.27824521 0.         0.4711101  0.         0.         0.
+          0.4711101  0.         0.         0.35829137 0.         0.35829137
+          0.4711101  0.         0.         0.         0.         0.
+          0.        ]]
