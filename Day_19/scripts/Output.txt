@@ -1,0 +1,23 @@
+Output: pca_reduction.py
+        Variance retained by 2 components: 21.59%
+
+        The PCA transformation reduced the 64-dimensional digits dataset to 2 dimensions, retaining only 21.59% of the
+        total variance. While this reduction enables visualization of the data, it results in significant information
+        loss, leading to overlapping clusters and reduced separability between digit classes.
+
+------------------------------------------------------------------------------------------------------------------------
+
+Output: pca_vaiance_test.py
+        Number of components needed to keep 95%.
+
+        -The curve rises very steeply at the beginning.
+        -First few components capture major variance.
+        -After ~30 components, the curve flattens.
+        -PCA allows data-driven selection of components.
+        -Optimal number ≈ 30 components.
+
+        The scree plot shows that approximately 28–30 principal components are required to retain 95% of the total
+        variance. Beyond this point, additional components contribute very little to the overall variance, indicating
+        diminishing returns. Therefore, selecting around 30 components provides an optimal balance between
+        dimensionality reduction and information retention.
+
